@@ -1,4 +1,8 @@
-SinOsc s => dac;
+SinOsc s => Mixer.chan[0];
+s=>RtGrain rtgrain  => Mixer.chan[1];
+0.8=>Mixer.chan[1].pan;
+
+spork ~rtgrain.run();
 
 BPM bpm;
 bpm.set(120);

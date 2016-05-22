@@ -22,7 +22,7 @@ public class RtGrain extends Chubgraph{
 
 	lisa[recbuf].record(1);
 	
-	0=> int isGrain;
+	1=> int isGrain;
 
 	fun void setIsGrain(int i)
 	{
@@ -34,7 +34,6 @@ public class RtGrain extends Chubgraph{
 		while(true)
 		{
 
-			e=>now;
 			while(isGrain)
 			{
 				now + bufferlen => time later;

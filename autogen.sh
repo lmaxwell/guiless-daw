@@ -2,4 +2,5 @@ for f in lib/*/*
 do
     echo "Machine.add(\"$f\");"
 done
-echo "Machine.add(me.arg(0));"
+echo "for(0=>int i;i<me.args();i++)"
+echo "  Machine.add(me.arg(i));"

@@ -7,4 +7,5 @@ Machine.add("lib/instrument/MandolinBass.ck");
 Machine.add("lib/mixer/Mixer.ck");
 Machine.add("lib/seq/EuclidSeq.ck");
 Machine.add("lib/seq/FibonacciSeq.ck");
-Machine.add(me.arg(0));
+for(0=>int i;i<me.args();i++)
+  Machine.add(me.arg(i));
