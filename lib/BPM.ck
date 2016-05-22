@@ -4,7 +4,7 @@ public class BPM
     dur myDuration[4];
     static dur quarterNote, eighthNote, sixteenthNote, thirtysecondNote;
     
-    fun void tempo(float beat)  {
+    fun void set(float beat)  {
         // beat is BPM, example 120 beats per minute
         
         60.0/(beat) => float SPB; // seconds per beat
