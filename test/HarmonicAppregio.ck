@@ -1,9 +1,9 @@
 HarmonicAppregio ha => dac;
 
-ha.set(1);
 
 while(true)
 {
+    ha.set(Math.random2(0,5));
     ha.noteOn();
     4::second=>now;
     ha.noteOff();
