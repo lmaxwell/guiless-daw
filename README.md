@@ -14,5 +14,8 @@
 3. exlib2 : experement library (not chuck code)
 4. composition : compositions
 5. test: test unity
+6. autogen.sh : generate run.ck automatically
 
 
+## run
+>   chuck run.ck:composition/fibo/fibo.ck
