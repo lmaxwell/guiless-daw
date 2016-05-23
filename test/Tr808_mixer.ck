@@ -6,13 +6,13 @@ kick.samples()=>kick.pos;
 
 SndBuf snare=>Pan2 panSnare=>comp;
 "samples/RolandTr808/SnareDrum/SnareDrum0001.aif"=>snare.read;
-0.9=>panSnare.pan;
+0.45=>panSnare.pan;
 snare.samples()=>snare.pos;
 
 
 SndBuf clhat=>Pan2 panClhat=>comp;
 "samples/RolandTr808/cHihat/Closed Hihat0001.aif"=>clhat.read;
-0.9=>panClhat.pan;
+0.35=>panClhat.pan;
 clhat.samples()=>clhat.pos;
 
 comp[0].compress;
