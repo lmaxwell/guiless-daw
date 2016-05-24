@@ -1,6 +1,7 @@
 // Listing 9.21 MandoScore.ck makes and plays your new MandoPlayer
 // let's try all this out!! Make a MandoPlayer object
-MandoPlayer m;  // (1) Makes a smart MandoPlayer object
+MandoPlayer m => Mixer.bus[0];  // (1) Makes a smart MandoPlayer object
+0.4=>Mixer.bus[0].send[0].gain;
 
 // and declare some data for chording and strumming
 ["G","C","G","D","D","D","D","G"] @=> string chords[]; // (2) Array of string chord names

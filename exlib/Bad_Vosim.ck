@@ -1,5 +1,9 @@
  // dynamic patch
-  sinosc s1 => gain g => dac;
+  sinosc s1 => gain g => Mixer.bus[0];
+  0.4=>Mixer.bus[0].send[0].gain;
+  1.4=>Mixer.bus[0].send[1].gain;
+  Mixer.fxdelay.fbdelay.setTime(100::ms);
+
   // feed s1 into g as second input
   s1 => g;
   // feed s1 to zero crossing then blackhole, which pulls samples

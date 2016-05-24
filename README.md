@@ -1,5 +1,8 @@
 #library for chuck composition
 
+## Required chugins
+1. Gverb
+
 ## directory
 
 1. lib : implemented library 

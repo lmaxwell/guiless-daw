@@ -1,18 +1,19 @@
 
-SndBuf kick=>Pan2 panKick=>Dyno comp[2] => Gain drumGain[2]=>Mixer.chan[0];
+SndBuf kick=>Pan2 panKick=>Dyno comp[2] => Gain drumGain[2]=>Mixer.bus[0];
 "samples/RolandTr808/BassDrum/KickDrum0001.aif"=>kick.read;
 kick.samples()=>kick.pos;
 
+0.3=>Mixer.bus[0].send[0].gain;
 
 SndBuf snare=>Pan2 panSnare=>comp;
 "samples/RolandTr808/SnareDrum/SnareDrum0001.aif"=>snare.read;
-0.45=>panSnare.pan;
+-0.1=>panSnare.pan;
 snare.samples()=>snare.pos;
 
 
 SndBuf clhat=>Pan2 panClhat=>comp;
 "samples/RolandTr808/cHihat/Closed Hihat0001.aif"=>clhat.read;
-0.35=>panClhat.pan;
+-0.4=>panClhat.pan;
 clhat.samples()=>clhat.pos;
 
 comp[0].compress;

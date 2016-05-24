@@ -68,7 +68,7 @@ e => dac;
 
 // connect the Dinky
 // (in a future version of chuck, Dinky can be defined as an UGen)
-imp.connect( dac );
+imp.connect( g );
 // set the radius (should never be more than 1)
 imp.radius( .999 );
 

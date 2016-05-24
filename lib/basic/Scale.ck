@@ -6,7 +6,7 @@ public class Scale{
 	{
     if(mode=="ionian")
       [p-1,p,p+2,p+4,p+5,p+7,p+9]@=>note;
-		else if(mode=="dorian")
+	else if(mode=="dorian")
 			[p-2,p,p+2,p+3,p+5,p+7,p+8]@=>note;
     else if(mode=="phrygian")
       [p-2,p,p+1,p+3,p+5,p+7,p+8]@=>note;
