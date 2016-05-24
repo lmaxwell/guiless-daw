@@ -2,15 +2,13 @@
 // Four Mando "strings", plus some smarts
 // by Perry R. Cook, March 2013
 
-public class MandoPlayer {     // (1) Public MandoPlayer class definition.
+public class MandoPlayer extends Chubgraph {     // (1) Public MandoPlayer class definition.
     // make an array of four mandolin strings and connect them up
     Mandolin m[4];             // (2) Contains four Mandolin UGens.
-    m[0] => JCRev rev => dac;  // (3) Hooks them all up so you can hear them.
-    m[1] => rev;
-    m[2] => rev;
-    m[3] => rev;
-    0.25 => rev.gain;
-    0.02 => rev.mix;
+    m[0] => outlet;  // (3) Hooks them all up so you can hear them.
+    m[1] => outlet;
+    m[2] => outlet;
+    m[3] => outlet;
 
     // set all four string frequencies in one function
     fun void freqs(float gStr, float dStr, float aStr, float eStr)
@@ -21,27 +19,11 @@ public class MandoPlayer {     // (1) Public MandoPlayer class definition.
         m[3].freq(eStr);
     }
 
-    // set all four string notes in one function
-    fun void notes(int gNote, int dNote, int aNote, int eNote) {
-        m[0].freq(Std.mtof(gNote));   // (5) Sets all four string note numbers... 
-        m[1].freq(Std.mtof(dNote));   // (6) ...using .mtof.
-        m[2].freq(Std.mtof(aNote));
-        m[3].freq(Std.mtof(eNote));
-    }
-
-    // a few named chords to get you started, add your own!!
-    fun void chord(string which) {                   // (7) Chords by name.
-        if (which == "G") this.notes(55,62,71,79);   // (8) G Chord is G3, D4, B4, G5.
-        else if (which == "C") this.notes(55,64,72,79);
-        else if (which == "D") this.notes(57,62,69,78);
-        else <<< "I don't know this chord: ", which >>>;
-    }
-
     // roll a chord from lowest note to highest at rate
-    fun void roll(string chord, dur rate) 
+    fun void roll(Chord chord, dur rate) 
     {                               // (9) Chord roll (arpeggiate) function.
-        this.chord(chord);          // (10) Sets chord by string using MandoPlayer .chord function.
-        for (0 => int i; i < 4; i++) {
+        for (0 => int i; i < chord.note.cap(); i++) {
+            chord.note[i]=>Std.mtof=>m[i].freq;
             1 => m[i].noteOn;       // (11) Plays notes one at a time...
             rate => now;            // (12) ...with rate duration between.
         }
