@@ -35,7 +35,7 @@ while( true )
 			if(msg.data2>15 && msg.data2<23)
 			{
 				msg.data2-16=> int ich;
-				-(msg.data3-63)/64=>Mixer.chan[ich].pan;
+				-(msg.data3-63)/64=>Mixer.bus[ich].pan;
 			}
 			if(msg.data2>=64&&msg.data2<=71)
 			{

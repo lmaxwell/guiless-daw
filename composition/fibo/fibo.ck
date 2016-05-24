@@ -1,8 +1,10 @@
-SinOsc s => Mixer.chan[0];
-s=>RtGrain rtgrain  => Mixer.chan[1];
-0.8=>Mixer.chan[1].pan;
+SinOsc s => Mixer.bus[0];
+s=>RtGrain rtgrain  => Mixer.bus[1];
+0.8=>Mixer.bus[1].pan;
 
-//spork ~rtgrain.run();
+1.0=>Mixer.bus[1].send[0].gain;
+
+spork ~rtgrain.run();
 
 BPM bpm;
 bpm.set(160);

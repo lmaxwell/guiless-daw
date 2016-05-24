@@ -81,7 +81,7 @@ public class FibonacciPad extends Chubgraph
         
         for(0=>i;i<NUM;i++)
         {	
-            changeGain(sin[i],0.0,50::ms);
+            spork ~changeGain(sin[i],0.0,50::ms);
         }
 
     }
@@ -92,7 +92,11 @@ public class FibonacciPad extends Chubgraph
         {
             for(0=>i;i<NUM;i++)
             {	
-                changeGain(sin[i],0.0,10::ms);
+                //changeGain(sin[i],0.0,1::ms);
+                0.0=>sin[i].gain;
+            }
+            for(0=>i;i<NUM;i++)
+            {	
                 //addComponent(1.0/NUM,i);
                 spork ~addComponent(amp[i],i);
                 addRate=>now;
@@ -105,7 +109,11 @@ public class FibonacciPad extends Chubgraph
             randPerm();
             for(0=>i;i<NUM;i++)
             {	
-                changeGain(sin[perm[i]],0.0,10::ms);
+                //changeGain(sin[i],0.0,1::ms);
+                0.0=>sin[i].gain;
+            }
+            for(0=>i;i<NUM;i++)
+            {	
                 //addComponent(1.0/NUM,i);
                 spork ~addComponent(amp[perm[i]],perm[i]);
                 addRate=>now;
@@ -132,7 +140,7 @@ public class FibonacciPad extends Chubgraph
     fun void addComponent(float _gain,int i)
     {
         now=> time mark;
-        changeGain(sin[i],_gain,10::ms);
+        changeGain(sin[i],_gain,20::ms);
         /*
         _gain-sin[i].gain()=>float diff;
         while(now<mark+0.01::second)
@@ -169,18 +177,18 @@ public class FibonacciPad extends Chubgraph
             Math.random2(0,3)=> int k;
             if(k==0)
             {
-                rmComponent(j);
+                spork ~rmComponent(j);
                 //<<<"remove">>>;
             }
             else if(k==1)
             {
-                addComponent(amp[j]/2.0,j);
+                spork ~addComponent(amp[j]/2.0,j);
                 //<<<"add">>>;
                 //Math.random2f(-1.0,1.0)=>pan[j].pan;
             }
             else if(k==2)
             {
-                addComponent(amp[j]*1.2,j);
+                spork ~addComponent(amp[j]*1.2,j);
             //	Math.random2f(-1.0,1.0)=>pan[j].pan;
                 //<<<"add">>>;
             }
@@ -188,8 +196,8 @@ public class FibonacciPad extends Chubgraph
             {
                 Math.random2(0,NUM-1)=>int l;
                 sin[j].gain()=>float temp;
-                changeGain(sin[j],sin[l].gain(),10::ms);
-                changeGain(sin[l],temp,10::ms);
+                spork ~changeGain(sin[j],sin[l].gain(),10::ms);
+                spork ~changeGain(sin[l],temp,10::ms);
                 //<<<"swap">>>;
             }
             susRate=>now;
@@ -365,10 +373,12 @@ public class FibonacciPad extends Chubgraph
 
 
 
-FibonacciPad fibpad => Mixer.chan[0];
-fibpad.set(110,14,2);
+FibonacciPad fibpad => Mixer.bus[0];
+0.4=>Mixer.bus[0].send[0].gain;
+fibpad.set(110,20,2);
 //fibpad.setADSR(1::ms,2::ms,0.8,1::second);
 1.0 =>fibpad.gain;
+
 
 Scale scale;
 scale.set(50,"lydian");
@@ -379,7 +389,7 @@ while(true)
     scale.sample()=>Std.mtof =>freq;
     fibpad.setFreq(freq);
     fibpad.noteOn();
-    10::second=>now;
+    1.5::second=>now;
     fibpad.noteOff();
-    0.5::second=>now;
+    0.5::second =>now;
 }
