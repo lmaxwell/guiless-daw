@@ -1,7 +1,7 @@
 public class RtGrain extends Chubgraph{
 
 	LiSa lisa[3];
-	1::second=> dur bufferlen;
+	5::second=> dur bufferlen;
 	0 => int recbuf;
 	2 => int playbuf;
 	
@@ -38,16 +38,24 @@ public class RtGrain extends Chubgraph{
 			{
 				now + bufferlen => time later;
 
+                0=>int count;
+                float newrate;
+                dur newdur;
+                
 				// toss some grains
 				while( now < later )
 				{
-					Math.random2f(0.5, 2.5) => float newrate;
-					Math.random2f(250, 600) * 1::ms => dur newdur;
+                    if(count%10==0)
+                    {
+                        Math.random2f(0.8, 1.2) =>  newrate;
+                        Math.random2f(450, 600) * 1::ms => newdur;
+                    }
 					
 					// grain
-					spork ~ getgrain(playbuf, newdur, 20::ms, 20::ms, newrate);
+					spork ~ getgrain(playbuf, newdur, 50::ms, 50::ms, newrate);
 					// advance time
 					30::ms => now;
+                    count+1=>count;
 				}
 
 				// rotate the record and playbufs
