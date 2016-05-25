@@ -39,7 +39,9 @@
 
 >   chuck run.ck:composition/RissetBeat/chordbeat.ck
 
->   chuck run.ck:composition/fibo/fibo.ck
+>   chuck run.ck:composition/fibo/fiboseq.ck
+
+>   chuck run.ck:composition/fibo/fiboarp.ck
 
 >   chuck run.ck:composition/mando/mando.ck
 
