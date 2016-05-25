@@ -4,6 +4,7 @@ public class FibonacciArp extends Chubgraph
     SinOsc sin[NUM];
     float amp[NUM];
     int perm[NUM];
+    int num;
     Envelope env;
     int i;
     float freq;
@@ -36,7 +37,7 @@ public class FibonacciArp extends Chubgraph
 
     fun void set(int _num,dur rate)
     {
-        _num=>NUM;
+        _num=>num;
         randAmp();
         rate=>addRate;
     }
@@ -56,7 +57,7 @@ public class FibonacciArp extends Chubgraph
         _freq=>  freq;
         0=>p;
         1=>q;
-        for(0=>i;i<NUM;i++)
+        for(0=>i;i<num;i++)
         {
             p+q=>r;
             q=>p;
@@ -78,7 +79,7 @@ public class FibonacciArp extends Chubgraph
         env.keyOff();
         0=>isNoteOn;
         
-        for(0=>i;i<NUM;i++)
+        for(0=>i;i<num;i++)
         {	
             spork ~changeGain(sin[i],0.0,50::ms);
         }
@@ -87,12 +88,12 @@ public class FibonacciArp extends Chubgraph
 
     fun void play()
     {
-            for(0=>i;i<NUM;i++)
+            for(0=>i;i<num;i++)
             {	
                 //changeGain(sin[i],0.0,1::ms);
                 0.0=>sin[i].gain;
             }
-            for(0=>i;i<NUM;i++)
+            for(0=>i;i<num;i++)
             {	
                 //addComponent(1.0/NUM,i);
                 spork ~addComponent(amp[i],i);
@@ -138,7 +139,7 @@ public class FibonacciArp extends Chubgraph
 
         while(isNoteOn)
         {
-            Math.random2(0,NUM-1)=>int j;
+            Math.random2(0,num-1)=>int j;
             Math.random2(0,3)=> int k;
             if(k==0)
             {
@@ -159,7 +160,7 @@ public class FibonacciArp extends Chubgraph
             }
             else
             {
-                Math.random2(0,NUM-1)=>int l;
+                Math.random2(0,num-1)=>int l;
                 sin[j].gain()=>float temp;
                 spork ~changeGain(sin[j],sin[l].gain(),10::ms);
                 spork ~changeGain(sin[l],temp,10::ms);
@@ -172,16 +173,16 @@ public class FibonacciArp extends Chubgraph
     fun void randAmp()
     {
         0=>float sum;
-        for(0=>i;i<NUM;i++)
+        for(0=>i;i<num;i++)
         {
             //Math.randomf()=>amp[i];
-            1.0/NUM =>amp[i];
+            1.0/(i+1) =>amp[i];
             sum+amp[i]=>sum;
         }
 
-        for(0=>i;i<NUM;i++)
+        for(0=>i;i<num;i++)
         {
-            amp[i]/sum/(2*NUM)=>amp[i];
+            amp[i]/num/sum=>amp[i];
         }
     }
 }
