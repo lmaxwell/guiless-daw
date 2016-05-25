@@ -5,6 +5,8 @@ Machine.add("lib/effect/FbDelay.ck");
 Machine.add("lib/effect/RtGrain.ck");
 Machine.add("lib/instrument/MandoPlayer.ck");
 Machine.add("lib/instrument/MandolinBass.ck");
+Machine.add("lib/instrument/RissetChordBeat.ck");
+Machine.add("lib/instrument/RissetNoteBeat.ck");
 Machine.add("lib/mixer/Mixer.ck");
 Machine.add("lib/seq/EuclidSeq.ck");
 Machine.add("lib/seq/FibonacciSeq.ck");
