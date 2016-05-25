@@ -33,6 +33,14 @@
 6. autogen.sh : generate run.ck automatically
 
 ## 4.Run
+>   chuck run.ck:composition/RissetBeat/rissetbeat.ck
+
+>   chuck run.ck:composition/RissetBeat/notebeat.ck
+
+>   chuck run.ck:composition/RissetBeat/chordbeat.ck
+
 >   chuck run.ck:composition/fibo/fibo.ck
 
 >   chuck run.ck:composition/mando/mando.ck
+
+
