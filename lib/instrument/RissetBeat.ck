@@ -7,6 +7,7 @@ public class RissetBeat extends Chubgraph{
     int NUM1,NUM2;
     200=>NUM1=>NUM2;
     SinOsc s[NUM1][NUM2];
+    float amp[NUM1][NUM2];
     float scale;
     float freq;
     float inc;
@@ -30,25 +31,37 @@ public class RissetBeat extends Chubgraph{
     }
     fun void play(float _freq,dur _dur)
     {
-        _freq=>freq;
+        _freq-inc=>freq;
         _dur/1::second => float songlength;
 
+        0=>float sum;
+        for (0 => int i; i < num1; 1 +=> i) {
+                this.freq+inc=>this.freq;             
+                20000/freq $ int=> int num3;
+                if(num3<num2)
+                {
+                    num3=>num2;
+                }
+                1.0 / num1 /(num2) =>  scale;
+            for (0 => int j; j < num2 ; 1 +=> j) {
+                1.0/scale/(j+1)=>amp[i][j];
+                if (i==0)
+                    sum+amp[i][j]=>sum;
+            }
+            
+        }
+
+
+        _freq-inc=>freq;
         for (0 => int i; i < num1; 1 +=> i) {
             this.freq+inc=>this.freq;             
-            20000/freq $ int=> int num3;
-            if(num3<num2)
-            {
-                num3=>num2;
-            }
 
-            1.0 / num1 /(num2/2) =>  scale;
+
             for (0 => int j; j < num2 ; 1 +=> j) {
-                1.0 / num1 /(num2/2) =>  scale;
                 this.freq * j  => float freq;
                 freq => s[i][j].freq;
                 freq *  (-1.0) => s[i][j].phase;
-                //1.0*scale/j => s[i][j].gain;
-                spork ~changeGain(s[i][j],1.0*scale/j,50::ms);
+                spork ~changeGain(s[i][j],amp[i][j]/(sum*1.2),50::ms);
                 }
         }
         env.keyOn();

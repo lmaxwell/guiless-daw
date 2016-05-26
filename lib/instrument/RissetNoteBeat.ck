@@ -2,7 +2,9 @@
 public class RissetNoteBeat extends Chubgraph{
     
     int num;
-    SinOsc s[];
+    int NUM;
+    100=>NUM;
+    SinOsc s[NUM];
     float scale;
     float freq;
     Envelope env=>outlet;
@@ -11,8 +13,11 @@ public class RissetNoteBeat extends Chubgraph{
     fun void set( int _num)
     {
         _num=>num;
-        new SinOsc[num] @=> s;//Hold all of the oscillators for this note
-        0.5 / num =>  scale;
+        for(0=>int i;i<NUM;i++)
+            s[i]=<env;
+        for(0=>int i;i<num;i++)
+            s[i]=>env;
+        0.9 / num =>  scale;
     }
     fun void play(float _freq,dur _dur)
     {
