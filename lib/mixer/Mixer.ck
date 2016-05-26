@@ -8,22 +8,21 @@ class Master {
     {
         in=>comp=>limit=>gain;
         //compressor
+        1.0=>comp[0].gain=>comp[1].gain;
+        -1=>comp[0].op=>comp[1].op;
         comp[0].compress();
         comp[1].compress();
-        2.0=>comp[0].gain=>comp[1].gain;
-        -1=>comp[0].op=>comp[1].op;
 
         //limiter
-        limit[0].limit();
-        limit[1].limit();
-        4=>limit[0].gain=>limit[1].gain;
-        0.0=>limit[0].thresh;
+        1.0=>limit[0].gain=>limit[1].gain;
+        0.9=>limit[0].thresh;
         limit[0].slopeBelow(1.0);
         limit[0].slopeAbove(0.0);
-        0.0=>limit[1].thresh;
+        0.9=>limit[1].thresh;
         limit[1].slopeBelow(1.0);
         limit[1].slopeAbove(0.0);
-        -1=>limit[0].op=>limit[1].op;
+        limit[0].limit();
+        limit[1].limit();
     }
 }
 
@@ -49,11 +48,16 @@ class FxDelay {
     Gain in[2];
     FbDelay fbdelay;
     Gain out[2];
+    Pan2 _pan;
+    fun void pan(float _pan)
+    {
+        _pan => this._pan.pan;
+    }
     fun void set()
     {
         fbdelay.setFeedBack(0.6);
         fbdelay.setMix(1.0);
-        in=>fbdelay=>out;
+        in=>fbdelay=> _pan=>out;
     }
 }
 
@@ -65,7 +69,7 @@ public class Mixer{
 }
 
 
-new Bus[6] @=> Mixer.bus;
+new Bus[12] @=> Mixer.bus;
 new Master @=> Mixer.master;
 new FxRev @=> Mixer.fxrev;
 new FxDelay @=> Mixer.fxdelay;
@@ -74,7 +78,7 @@ Mixer.master.set();
 Mixer.fxrev.set();
 Mixer.fxdelay.set();
 
-for (0=>int i;i<6;i++)
+for (0=>int i;i<12;i++)
 {
 	Mixer.bus[i] => Mixer.master.in; 
     .0 => Mixer.bus[i].send[0].gain;
