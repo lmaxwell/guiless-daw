@@ -1,4 +1,4 @@
-#Library for chuck composition
+#Library for chuck example
 
 ## 1.Required chugins(https://github.com/ccrma/chugins)
 1. Gverb
@@ -9,11 +9,11 @@
 2.  basic music modules: Note(TODO), Scale, Chord
 2.  instruments: drum machine(TODO), bass ,guitar(TODO)  etc.
 3.  effects : FeedBackDelay etc.
-4.  algorithm composition modules
+4.  algorithm example modules
     1.  algorithm sequence generator
         1. implemented: Fibonacci, Euclid
         2. TODO: cellular automata, Markov chain etc
-    2.  spectral composition(working on)
+    2.  spectral example(working on)
         1. risset appregio, resset beat
         2. FibonacciPad
     3.  grain synthesis(working on)
@@ -28,21 +28,21 @@
     5. lib/seq : sequence generator
 2. exlib : experiment library
 3. exlib2 : experement library (not chuck code)
-4. composition : compositions
+4. example : examples
 5. test: test unity
 6. autogen.sh : generate run.ck automatically
 
 ## 4.Run
->   chuck run.ck:composition/RissetBeat/rissetbeat.ck
+>   chuck run.ck:example/RissetBeat/rissetbeat.ck
 
->   chuck run.ck:composition/RissetBeat/notebeat.ck
+>   chuck run.ck:example/RissetBeat/notebeat.ck
 
->   chuck run.ck:composition/RissetBeat/chordbeat.ck
+>   chuck run.ck:example/RissetBeat/chordbeat.ck
 
->   chuck run.ck:composition/fibo/fiboseq.ck
+>   chuck run.ck:example/fibo/fiboseq.ck
 
->   chuck run.ck:composition/fibo/fiboarp.ck
+>   chuck run.ck:example/fibo/fiboarp.ck
 
->   chuck run.ck:composition/mando/mando.ck
+>   chuck run.ck:example/mando/mando.ck
 
 
