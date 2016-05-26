@@ -1,6 +1,6 @@
 public class RissetChordBeat extends Chubgraph{
     
-    int num;
+    int num,num2;
     int NUM1,NUM2;
     6=>NUM1;
     100=>NUM2;
@@ -20,8 +20,9 @@ public class RissetChordBeat extends Chubgraph{
         {
             for (0=>int j;j<NUM2;j++)
             {
-                0=>s[i][j].gain;
+               // spork ~changeGain(s[i][j],0.0,10::ms);
                 s[i][j]=<env;
+                0.0=>s[i][j].gain;
             }
         }
 
@@ -41,7 +42,7 @@ public class RissetChordBeat extends Chubgraph{
 
         _dur/1::second => songlength;
         0=>float phase;
-        1.0/ num  =>  scale;
+        1.0/ (num*1.5)  =>  scale;
         if (num<15)
             0.07 => scale;
         /*
@@ -61,14 +62,23 @@ public class RissetChordBeat extends Chubgraph{
                 freq => s[i][j].freq;
                 freq * phase *  (-1.0) => s[i][j].phase;
                 //amp[j]/(sum*1.5) => s[i][j].gain;
-                spork ~changeGain(s[i][j],amp[i]*scale,50::ms);
+                spork ~changeGain(s[i][j],amp[i]*scale,50.0*(num $ float/1.5)*Math.random2(1,3)::ms);
                 }
             phase + 0.25*Math.random2(1,4) =>phase;
         }
         env.keyOn();
-        _dur-env_dur-10::ms=>now;
+        _dur-env_dur-50::ms=>now;
         env.keyOff();
-        env_dur+10::ms=>now;
+        /*
+        for (0=>int i;i<NUM1;i++)
+        {
+            for (0=>int j;j<NUM2;j++)
+            {
+                spork ~changeGain(s[i][j],0.0,10::ms);
+            }
+        }
+        */
+        env_dur+50::ms=>now;
     }
 
     fun void changeGain(UGen s ,float newGain,dur _dur)
@@ -79,8 +89,8 @@ public class RissetChordBeat extends Chubgraph{
         while(now<_time)
         {
             s.gain()=>oldGain;
-            oldGain+(diff)/500.0=>s.gain;
-            _dur/500.0=>now;
+            oldGain+(diff)/1000.0=>s.gain;
+            _dur/1000.0=>now;
         }
         
     }

@@ -16,13 +16,13 @@ public class Moe extends Chubgraph
     // set equal gain zeros
     1 => f.eqzs; 1 => f2.eqzs; 1 => f3.eqzs;
     // initialize float variable
-    1.5 * 3.14 => float v;
     // set filter gain
     .2 => f.gain; .04 => f2.gain; .01 => f3.gain;
       
     fun void run()
     {
         // infinite time-loop   
+        1.5 * 3.14 => float v;
         while( true )
         {
 
@@ -34,7 +34,7 @@ public class Moe extends Chubgraph
             // increment v
             v + .05 => v;
             // gain
-            0.2 + Math.sin(v)*.2 => g.gain;
+            0.15 + Math.sin(v)*.15 => g.gain;
             // advance time
             (80.0 + Math.sin(v*2.0)*10.0)::ms => now;
         }
