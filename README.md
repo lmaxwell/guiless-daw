@@ -39,6 +39,10 @@
 
 >   chuck run.ck:example/RissetBeat/chordbeat.ck
 
+>   chuck run.ck:example/LFO/lfo.ck
+
+>   chuck run.ck:example/LFO/lfochordbeat.ck
+
 >   chuck run.ck:example/fibo/fiboseq.ck
 
 >   chuck run.ck:example/fibo/fiboarp.ck
