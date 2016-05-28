@@ -1,20 +1,24 @@
 
 class Master {
     Gain in[2];
-	Gain  gain[2];
+	Gain  _gain[2];
 	Dyno  comp[2];
 	Dyno  limit[2];
+    fun void gain(float __gain)
+    {
+        __gain => _gain[0].gain =>_gain[1].gain; 
+    }
     fun void set()
     {
-        in=>comp=>limit=>gain;
+        in=>comp=>limit=>_gain;
         //compressor
-        1.0=>comp[0].gain=>comp[1].gain;
+        2.0=>comp[0].gain=>comp[1].gain;
         -1=>comp[0].op=>comp[1].op;
         comp[0].compress();
         comp[1].compress();
 
         //limiter
-        1.0=>limit[0].gain=>limit[1].gain;
+        2.0=>limit[0].gain=>limit[1].gain;
         0.9=>limit[0].thresh;
         limit[0].slopeBelow(1.0);
         limit[0].slopeAbove(0.0);
@@ -92,7 +96,7 @@ for (0=>int i;i<12;i++)
 Mixer.fxrev.out => Mixer.master.in;
 Mixer.fxdelay.out => Mixer.master.in;
 
-Mixer.master.gain =>dac;
+Mixer.master._gain =>dac;
 
 //reverb
 
