@@ -1,4 +1,4 @@
-#Library for chuck example
+#Library for chuck composition 
 
 ## 1.Required chugins(https://github.com/ccrma/chugins)
 1. Gverb
@@ -9,11 +9,11 @@
 2.  basic music modules: Note(TODO), Scale, Chord
 2.  instruments: drum machine(TODO), bass ,guitar(TODO)  etc.
 3.  effects : FeedBackDelay etc.
-4.  algorithm example modules
+4.  algorithm  modules
     1.  algorithm sequence generator
         1. implemented: Fibonacci, Euclid
         2. TODO: cellular automata, Markov chain etc
-    2.  spectral example(working on)
+    2.  spectral composition(working on)
         1. risset appregio, resset beat
         2. FibonacciPad
     3.  grain synthesis(working on)
