@@ -6,9 +6,15 @@ public class LFO{
         _freq => lfo.freq;
     }
 
-    fun void gain(float _gain)
+    fun float gain()
+    {
+        return lfo.gain();
+    }
+
+    fun float  gain(float _gain)
     {
         _gain => lfo.gain;
+        return _gain;
     }
     
     fun float get()
