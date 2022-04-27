@@ -36,7 +36,6 @@ public class RissetNoteBeat extends Chubgraph{
         env.duration()=>now;
         
     }
-
 }
 
 
